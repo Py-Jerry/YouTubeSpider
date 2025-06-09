@@ -29,7 +29,7 @@ def retry_request(max_retries=3, delay=1, backoff=3, exceptions=(Exception,)):
                 except exceptions as e:
                     if attempt == max_retries:
                         logger.error(f"重试次数达到最大值 {func.__name__}: {str(e)}")
-                        raise
+                        return None
 
                     sleep_time = delay * (backoff ** (attempt - 1)) + random.uniform(0, 1)
                     logger.warning(
